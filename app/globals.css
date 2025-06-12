@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================================================== */
+/* =================== TEMA "DIGITAL SILK" APLICADO ======================= */
+/* ========================================================================== */
+
+@layer base {
+  /*
+   * TEMA CLARO (LIGHT MODE)
+   * Uma versão clara e profissional que complementa o tema escuro.
+   */
+  :root {
+    --background: 240 5% 96%;      /* Fundo: Cinza muito claro */
+    --foreground: 260 6% 10%;      /* Texto: Cinza-chumbo (do tema escuro) */
+
+    --card: 0 0% 100%;             /* Card: Branco puro */
+    --card-foreground: 260 6% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 260 6% 10%;
+
+    /* Cor de destaque principal (Lavanda) */
+    --primary: 249 80% 75%;
+    --primary-foreground: 260 6% 10%; /* Texto escuro sobre o botão claro */
+
+    --secondary: 240 5% 90%;
+    --secondary-foreground: 260 6% 20%;
+
+    --muted: 240 5% 90%;
+    --muted-foreground: 240 4% 46%;
+
+    --accent: 240 5% 90%;
+    --accent-foreground: 260 6% 20%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 5% 85%;
+    --input: 240 5% 85%;
+    --ring: 249 80% 75%;
+
+    --radius: 0.5rem;
+  }
+
+  /*
+   * TEMA ESCURO (DARK MODE) - O NOSSO "DIGITAL SILK"
+   * A estética principal que definimos, com tons profundos e o destaque Lavanda.
+   */
+  .dark {
+    --background: 260 6% 10%;      /* Fundo: #1A181D (Cinza-Chumbo Profundo) */
+    --foreground: 0 0% 94%;        /* Texto: #F0F0F0 (Branco Neve) */
+
+    --card: 260 6% 15%;            /* Card: #242228 (Cinza-Vulcânico) */
+    --card-foreground: 0 0% 94%;
+
+    --popover: 260 6% 15%;
+    --popover-foreground: 0 0% 94%;
+
+    /* Cor de destaque principal (Lavanda) */
+    --primary: 249 100% 83%;       /* Destaque: #B8A9FF */
+    --primary-foreground: 260 6% 10%; /* Texto escuro sobre o botão Lavanda */
+
+    --secondary: 260, 6%, 15%;
+    --secondary-foreground: 0 0% 94%;
+
+    --muted: 260 4% 24%;           /* Muted: #3C3A40 (para bordas e elementos discretos) */
+    --muted-foreground: 0 0% 64%;  /* Muted Text: #A3A3A3 */
+
+    --accent: 260 4% 24%;
+    --accent-foreground: 0 0% 94%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 260 4% 24%;          /* Borda: #3C3A40 */
+    --input: 260 4% 24%;
+    --ring: 249 100% 83%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* EFEITO DE TEXTURA/GRADIENTE SUTIL PARA O TEMA ESCURO */
+  .dark body {
+    background-image: radial-gradient(circle at 25% 25%, hsla(var(--primary), 0.05), transparent 50%);
+  }
+}
+
+/* ========================================================================== */
+/* ============= EFEITOS ESPECIAIS E CLASSES CUSTOMIZADAS ================= */
+/* ========================================================================== */
+
+/* Classe para Efeito de Vidro Fosco (Glassmorphism) */
+.glassmorphism {
+  @apply bg-card/60 backdrop-blur-xl; /* Usa a cor do card com 60% de opacidade e aplica o blur */
+}
+
+/* Scrollbar Customizada (mantida do seu arquivo original) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-foreground/30 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-foreground/50;
+}
+
+/* Animações (mantidas do seu arquivo original) */
+.animate-fade-in { animation: fadeIn 0.3s ease-in-out; }
+.animate-slide-up { animation: slideUp 0.3s ease-in-out; }
+.animate-slide-down { animation: slideDown 0.3s ease-in-out; }
+.animate-scale { animation: scale 0.2s ease-in-out; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes slideDown { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes scale { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+/* Estilos de Componentes (mantidos e aprimorados do seu arquivo original) */
+.status-badge { @apply inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium transition-colors; }
+.status-badge-success { @apply bg-success-muted text-success-foreground; }
+.status-badge-warning { @apply bg-warning-muted text-warning-foreground; }
+.status-badge-info { @apply bg-info-muted text-info-foreground; }
+.status-badge-pending { @apply bg-pending-muted text-pending-foreground; }
+
+/* Efeito de hover aprimorado para cards, usando a cor primária para destaque */
+.card-hover {
+  @apply transition-all duration-300 ease-in-out hover:border-primary hover:shadow-lg;
+}
+
+/* Efeito de hover aprimorado para botões, com um leve "lift" */
+.btn-hover {
+  @apply transition-all duration-200 ease-in-out hover:shadow-md hover:-translate-y-px;
+}
+
+.avatar { @apply flex items-center justify-center rounded-full bg-primary/10 text-primary font-medium; }
+.page-transition { @apply animate-fade-in; }
+.tab-transition { @apply transition-all duration-200; }
+.tooltip { @apply absolute z-50 px-2 py-1 text-xs rounded bg-foreground text-background opacity-0 transition-opacity duration-200; }
+.tooltip-visible { @apply opacity-100; }
